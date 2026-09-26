@@ -8,4 +8,7 @@ debs/*
 *.sublime-workspace
 _/*
 */obj/*
-**/obj/*
+**/obj/*.theos/
+packages/
+debs/
+.DS_Store

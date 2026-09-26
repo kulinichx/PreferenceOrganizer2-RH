@@ -1,0 +1,57 @@
+name: Build PreferenceOrganizer2-RH
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, roothide ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 15.4
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+
+      - name: Install build dependencies
+        run: |
+          set -euxo pipefail
+          brew install ldid dpkg make
+
+      - name: Install RootHide Theos
+        run: |
+          set -euxo pipefail
+          THEOS="$GITHUB_WORKSPACE/.theos"
+          git clone --recursive --depth 1 https://github.com/roothide/theos.git "$THEOS"
+          echo "THEOS=$THEOS" >> "$GITHUB_ENV"
+
+      - name: Install iOS 16.5 SDK
+        run: |
+          set -euxo pipefail
+          mkdir -p "$THEOS/sdks"
+          curl -L --fail --retry 5 --retry-delay 3 -o /tmp/sdk.tar.xz \
+            https://github.com/theos/sdks/releases/latest/download/iPhoneOS16.5.sdk.tar.xz
+          tar -xJf /tmp/sdk.tar.xz -C "$THEOS/sdks"
+          test -d "$THEOS/sdks/iPhoneOS16.5.sdk"
+
+      - name: Build RootHide package
+        run: |
+          set -euxo pipefail
+          gmake clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
+
+      - name: Build rootless package
+        run: |
+          set -euxo pipefail
+          gmake clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+          ls -lah packages
+          for f in packages/*.deb; do echo "== $f"; dpkg-deb -I "$f" | grep -E 'Package|Version|Architecture'; dpkg-deb -c "$f"; done
+
+      - name: Upload DEBs
+        uses: actions/upload-artifact@v4
+        with:
+          name: PreferenceOrganizer2-RH-debs
+          path: packages/*.deb
+          if-no-files-found: error

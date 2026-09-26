@@ -55,7 +55,6 @@ static NSString *socialAppsLabel;
 static NSString *tweaksLabel;
 static NSString *appStoreAppsLabel;
 
-KarenLocalizer *karenLocalizer;
 
 static NSMutableArray *unorganisedSpecifiers = nil;
 
@@ -70,11 +69,10 @@ static void PO2InitPrefs() {
 	} else {
 		PO2BoolPref(shouldShowSocialApps, ShowSocialApps, 1);
 	}
-	karenLocalizer = [[KarenLocalizer alloc] initWithKarenLocalizerBundle:@"PreferenceOrganizer2"];
-	PO2StringPref(appleAppsLabel, AppleAppsName, [karenLocalizer karenLocalizeString:@"APPLE_APPS"]);
-	PO2StringPref(socialAppsLabel, SocialAppsName, [karenLocalizer karenLocalizeString:@"SOCIAL_APPS"]);
-	PO2StringPref(tweaksLabel, TweaksName, [karenLocalizer karenLocalizeString:@"TWEAKS"]);
-	PO2StringPref(appStoreAppsLabel, AppStoreAppsName, [karenLocalizer karenLocalizeString:@"APP_STORE_APPS"]);
+	PO2StringPref(appleAppsLabel, AppleAppsName, PO2LocalizedString(@"APPLE_APPS"));
+	PO2StringPref(socialAppsLabel, SocialAppsName, PO2LocalizedString(@"SOCIAL_APPS"));
+	PO2StringPref(tweaksLabel, TweaksName, PO2LocalizedString(@"TWEAKS"));
+	PO2StringPref(appStoreAppsLabel, AppStoreAppsName, PO2LocalizedString(@"APP_STORE_APPS"));
 }
 
 void removeOldAppleThirdPartySpecifiers(NSMutableArray <PSSpecifier *> *specifiers) {
@@ -164,19 +162,6 @@ void removeOldAppleGroupSpecifiers(NSMutableArray <PSSpecifier *> *specifiers) {
 		if (unorganisedSpecifiers == nil) {
 			unorganisedSpecifiers = [specifiers.copy retain];
 		}
-		// Do a check for net.angelxwind.preferenceorganizer2
-		if (access(DPKG_PATH, F_OK) == -1) {
-			UIAlertView *aptAlert = [[UIAlertView alloc] initWithTitle:[karenLocalizer karenLocalizeString:@"WARNING"]
-				message:[NSString stringWithFormat:@"%@ %@ %@", [karenLocalizer karenLocalizeString:@"APT_DETAIL_1"], [karenLocalizer karenLocalizeString:@"APT_DETAIL_2"],[karenLocalizer karenLocalizeString:@"APT_DETAIL_3"]]
-				delegate:self
-				cancelButtonTitle:[karenLocalizer karenLocalizeString:@"OK"]
-				otherButtonTitles:nil];
-			[aptAlert show];
-			PO2Log([NSString stringWithFormat:@"%@", [karenLocalizer karenLocalizeString:@"APT_DETAIL_1"]], 1);
-			PO2Log([NSString stringWithFormat:@"%@", [karenLocalizer karenLocalizeString:@"APT_DETAIL_2"]], 1);
-			PO2Log([NSString stringWithFormat:@"%@", [karenLocalizer karenLocalizeString:@"APT_DETAIL_3"]], 1);
-		}
-
 		// Okay, let's start pushing paper.
 		int groupID = 0;
 		NSMutableDictionary *organizableSpecifiers = [[NSMutableDictionary alloc] init];
@@ -348,7 +333,7 @@ void removeOldAppleGroupSpecifiers(NSMutableArray <PSSpecifier *> *specifiers) {
 		if (shouldShowTweaks && TweakSpecifiers) {
 			[specifiers removeObjectsInArray:TweakSpecifiers];
 			PSSpecifier *cydiaSpecifier = [PSSpecifier preferenceSpecifierNamed:tweaksLabel target:self set:NULL get:NULL detail:[TweakSpecifiersController class] cell:[PSTableCell cellTypeFromString:@"PSLinkCell"] edit:nil];
-			[cydiaSpecifier setProperty:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/POPreferences.bundle/Tweaks.png"] forKey:@"iconImage"];
+			[cydiaSpecifier setProperty:[UIImage imageWithContentsOfFile:PO2JBPath(@"/Library/PreferenceBundles/POPreferences.bundle/Tweaks.png")] forKey:@"iconImage"];
 			[specifiers addObject:cydiaSpecifier];
 		}
 
@@ -572,7 +557,7 @@ void removeOldAppleGroupSpecifiers(NSMutableArray <PSSpecifier *> *specifiers) {
 				[specifiers removeObjectsInArray:TweakSpecifiers];
 				[TweakSpecifiers removeObjectAtIndex:0];
 				PSSpecifier *cydiaSpecifier = [PSSpecifier preferenceSpecifierNamed:tweaksLabel target:self set:NULL get:NULL detail:[TweakSpecifiersController class] cell:[PSTableCell cellTypeFromString:@"PSLinkCell"] edit:nil];
-				[cydiaSpecifier setProperty:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/POPreferences.bundle/Tweaks.png"] forKey:@"iconImage"];
+				[cydiaSpecifier setProperty:[UIImage imageWithContentsOfFile:PO2JBPath(@"/Library/PreferenceBundles/POPreferences.bundle/Tweaks.png")] forKey:@"iconImage"];
 				[specifiers addObject:cydiaSpecifier];
 			}
 		}

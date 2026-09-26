@@ -2,10 +2,18 @@
 #import <Foundation/Foundation.h>
 #import <version.h>
 
-#define DPKG_PATH "/var/lib/dpkg/info/net.angelxwind.preferenceorganizer2.list"
+// ---- Jailbreak root path helper (rootful / rootless / roothide) ----
+#if defined(PO2_ROOTHIDE)
+	#include <roothide.h>
+	#define PO2JBPath(p) jbroot(p)
+#elif defined(PO2_ROOTLESS)
+	#define PO2JBPath(p) ([@"/var/jb" stringByAppendingString:(p)])
+#else
+	#define PO2JBPath(p) (p)
+#endif
 
 #define NSLog(LogContents, ...) NSLog((@"PreferenceOrganizer 2: %s:%d " LogContents), __FUNCTION__, __LINE__, ##__VA_ARGS__)
-#define PO2PreferencePath @"/User/Library/Preferences/net.angelxwind.preferenceorganizer2.plist"
+#define PO2PreferencePath @"/var/mobile/Library/Preferences/net.angelxwind.preferenceorganizer2.plist"
 
 #define STRINGIFY_(x) #x
 #define STRINGIFY(x) STRINGIFY_(x)
@@ -39,7 +47,9 @@
 } while (0)
 
 #define PO2Observer(funcToCall, listener) CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)funcToCall, CFSTR(listener), NULL, CFNotificationSuspensionBehaviorCoalesce);
+#define PO2PreferenceDomain @"net.angelxwind.preferenceorganizer2"
+// Read through cfprefsd (the file on disk can be stale on iOS 8+)
 #define PO2SyncPrefs()\
-	NSDictionary *PO2Settings = [NSDictionary dictionaryWithContentsOfFile:PO2PreferencePath];
+	NSDictionary *PO2Settings = [[NSUserDefaults standardUserDefaults] persistentDomainForName:PO2PreferenceDomain];
 
 #define isJonyIve() (kCFCoreFoundationVersionNumber > kCFCoreFoundationVersionNumber_iOS_6_1)

@@ -4,7 +4,7 @@
 #import <Preferences/PSTableCell.h>
 #import <UIKit/UIKit.h>
 #import <substrate.h>
-#import <KarenLocalizer/KarenLocalizer.h>
+#import "PO2Localizer.h"
 #import "PO2Common.h"
 #import "PO2Log.h"
 

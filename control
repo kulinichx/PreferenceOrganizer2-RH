@@ -1,14 +1,12 @@
-Package: net.angelxwind.preferenceorganizer2
-Name: PreferenceOrganizer 2
+Package: com.kulinichx.preferenceorganizer2rh
+Name: PreferenceOrganizer 2 (RootHide)
 Architecture: iphoneos-arm
-Description: Organises your Preferences app into several configurable categories for ease of navigation.
-Homepage: https://cydia.akemi.ai/
-Depiction: https://cydia.akemi.ai/?page/net.angelxwind.preferenceorganizer2
+Description: Organises your Settings app into configurable categories. Unofficial RootHide/rootless port of PreferenceOrganizer 2 for iOS 15-16.
+Homepage: https://github.com/kulinichx/PreferenceOrganizer2-RH
 Author: Karen/あけみ <karen@akemi.ai>
+Maintainer: kulinichx
 Section: Tweaks
-Depends: mobilesubstrate, preferenceloader (>= 2.2.3), firmware (>= 6.0), bash, net.angelxwind.karenprefs (>= 1.5), net.angelxwind.karenlocalizer
-Conflicts: com.phillipt.noappsettings, jp.r-plus.cloaky, me.qusic.preferenceorganizer, com.sull.preferenceorganizer, com.sull.preferenceorganizer2, com.sull.preferenceorganizer7
-Version: 4.1
-Maintainer: Karen/あけみ <karen@akemi.ai>
-Replaces: org.ilendsoft.preferenceorganizer, com.eliz.preferenceorganizer7
-Icon: file:///Library/KarenRepoIcons/net.angelxwind.preferenceorganizer2.png
+Depends: mobilesubstrate | ellekit, preferenceloader, firmware (>= 15.0)
+Conflicts: net.angelxwind.preferenceorganizer2, com.phillipt.noappsettings, jp.r-plus.cloaky, me.qusic.preferenceorganizer, com.sull.preferenceorganizer, com.sull.preferenceorganizer2, com.sull.preferenceorganizer7
+Replaces: net.angelxwind.preferenceorganizer2
+Version: 4.1.1-rh1

@@ -8,7 +8,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>© 2013-2021 Karen/あけみ, Eliz, Julian Weiss (insanj), ilendemli, Hiraku Wang (hirakujira), Gary Lin (garynil)</string>
+			<string>© 2013-2021 Karen/あけみ, Eliz, Julian Weiss (insanj), ilendemli, Hiraku Wang (hirakujira), Gary Lin (garynil). RootHide port by kulinichx.</string>
 		</dict>
 		
 		<dict>
@@ -55,7 +55,7 @@
 			<key>label</key>
 			<string>ENABLE</string>
 			<key>PostNotification</key>
-			<string>net.angelxwind.preferenceorganizer2-preferencesChanged</string>
+			<string>net.angelxwind.preferenceorganizer2-PreferencesChanged</string>
 			<key>cellClass</key>
 			<string>POSwitchCell</string>
 		</dict>
@@ -63,8 +63,6 @@
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
-			<key>cellClass</key>
-			<string>KarenPrefsEditableTextCellWithReturn</string>
 			<key>defaults</key>
 			<string>net.angelxwind.preferenceorganizer2</string>
 			<key>key</key>
@@ -74,7 +72,7 @@
 			<key>placeholder</key>
 			<string>APPLE_APPS</string>
 			<key>PostNotification</key>
-			<string>net.angelxwind.preferenceorganizer2-preferencesChanged</string>
+			<string>net.angelxwind.preferenceorganizer2-PreferencesChanged</string>
 		</dict>
 
 		<dict>
@@ -104,7 +102,7 @@
 			<key>label</key>
 			<string>ENABLE</string>
 			<key>PostNotification</key>
-			<string>net.angelxwind.preferenceorganizer2-preferencesChanged</string>
+			<string>net.angelxwind.preferenceorganizer2-PreferencesChanged</string>
 			<key>cellClass</key>
 			<string>POSwitchCell</string>
 			<key>pl_filter</key>
@@ -120,8 +118,6 @@
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
-			<key>cellClass</key>
-			<string>KarenPrefsEditableTextCellWithReturn</string>
 			<key>defaults</key>
 			<string>net.angelxwind.preferenceorganizer2</string>
 			<key>key</key>
@@ -131,7 +127,7 @@
 			<key>placeholder</key>
 			<string>SOCIAL_APPS</string>
 			<key>PostNotification</key>
-			<string>net.angelxwind.preferenceorganizer2-preferencesChanged</string>
+			<string>net.angelxwind.preferenceorganizer2-PreferencesChanged</string>
 			<key>pl_filter</key>
 			<dict>
 				<key>CoreFoundationVersion</key>
@@ -161,7 +157,7 @@
 			<key>label</key>
 			<string>ENABLE</string>
 			<key>PostNotification</key>
-			<string>net.angelxwind.preferenceorganizer2-preferencesChanged</string>
+			<string>net.angelxwind.preferenceorganizer2-PreferencesChanged</string>
 			<key>cellClass</key>
 			<string>POSwitchCell</string>
 		</dict>
@@ -169,8 +165,6 @@
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
-			<key>cellClass</key>
-			<string>KarenPrefsEditableTextCellWithReturn</string>
 			<key>defaults</key>
 			<string>net.angelxwind.preferenceorganizer2</string>
 			<key>key</key>
@@ -180,7 +174,7 @@
 			<key>placeholder</key>
 			<string>TWEAKS</string>
 			<key>PostNotification</key>
-			<string>net.angelxwind.preferenceorganizer2-preferencesChanged</string>
+			<string>net.angelxwind.preferenceorganizer2-PreferencesChanged</string>
 		</dict>
 
 		<dict>
@@ -202,7 +196,7 @@
 			<key>label</key>
 			<string>ENABLE</string>
 			<key>PostNotification</key>
-			<string>net.angelxwind.preferenceorganizer2-preferencesChanged</string>
+			<string>net.angelxwind.preferenceorganizer2-PreferencesChanged</string>
 			<key>cellClass</key>
 			<string>POSwitchCell</string>
 		</dict>
@@ -210,8 +204,6 @@
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
-			<key>cellClass</key>
-			<string>KarenPrefsEditableTextCellWithReturn</string>
 			<key>defaults</key>
 			<string>net.angelxwind.preferenceorganizer2</string>
 			<key>key</key>
@@ -221,7 +213,7 @@
 			<key>placeholder</key>
 			<string>APP_STORE_APPS</string>
 			<key>PostNotification</key>
-			<string>net.angelxwind.preferenceorganizer2-preferencesChanged</string>
+			<string>net.angelxwind.preferenceorganizer2-PreferencesChanged</string>
 		</dict>
 
 		<dict>
@@ -237,8 +229,6 @@
 			<string>openDonate</string>
 			<key>cell</key>
 			<string>PSButtonCell</string>
-			<key>cellClass</key>
-			<string>KarenPrefsGreenTextButtonCell</string>
 			<key>icon</key>
 			<string>paypal.png</string>
 			<key>label</key>
@@ -277,8 +267,6 @@
 		<dict>
 			<key>cell</key>
 			<string>PSButtonCell</string>
-			<key>cellClass</key>
-			<string>KarenPrefsRedTextButtonCell</string>
 			<key>label</key>
 			<string>RESET</string>
 			<key>action</key>

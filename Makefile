@@ -1,23 +1,25 @@
-TARGET =: clang::6.0
-ARCHS = armv7 armv7s arm64 arm64e
-DEBUG = 0
-GO_EASY_ON_ME = 1
+ARCHS = arm64 arm64e
+TARGET = iphone:clang:16.5:15.0
+THEOS_PACKAGE_SCHEME ?= roothide
+INSTALL_TARGET_PROCESSES = Preferences
 
-THEOS_PACKAGE_DIR_NAME = debs
-PACKAGE_VERSION = $(THEOS_PACKAGE_BASE_VERSION)
+THEOS_PACKAGE_DIR_NAME = packages
 
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = PreferenceOrganizer2
 PreferenceOrganizer2_FILES = PreferenceOrganizer2.xm PO2Log.mm
-PreferenceOrganizer2_LIBRARIES = karenlocalizer
 PreferenceOrganizer2_FRAMEWORKS = UIKit Foundation
 PreferenceOrganizer2_PRIVATE_FRAMEWORKS = Preferences
-PreferenceOrganizer2_CFLAGS += -DVERBOSE
+# Original code is MRC (no ARC); silence legacy-API warnings so -Werror doesn't trip
+PreferenceOrganizer2_CFLAGS = -Wno-deprecated-declarations -Wno-unused-function -Wno-unused-variable -Wno-objc-method-access -Wno-incompatible-pointer-types -Wno-sign-compare -Wno-int-conversion -Wno-shorten-64-to-32 -Wno-unused-but-set-variable
+
+ifeq ($(THEOS_PACKAGE_SCHEME),roothide)
+PreferenceOrganizer2_CFLAGS += -DPO2_ROOTHIDE
+else ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
+PreferenceOrganizer2_CFLAGS += -DPO2_ROOTLESS
+endif
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += POPreferences
 include $(THEOS_MAKE_PATH)/aggregate.mk
-
-after-install::
-	install.exec "killall Preferences; exit 0"

@@ -1,17 +1,21 @@
-TARGET =: clang
-ARCHS = armv7 armv7s arm64 arm64e
-DEBUG = 0
-GO_EASY_ON_ME = 1
+ARCHS = arm64 arm64e
+TARGET = iphone:clang:16.5:15.0
 
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = POPreferences
-POPreferences_FILES = POPreferences.mm 
+POPreferences_FILES = POPreferences.mm
 POPreferences_INSTALL_PATH = /Library/PreferenceBundles
-POPreferences_LIBRARIES = karenprefs karenlocalizer
 POPreferences_FRAMEWORKS = UIKit
-POPreferences_CFLAGS = -fobjc-arc
 POPreferences_PRIVATE_FRAMEWORKS = Preferences
+POPreferences_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-function
+
+ifeq ($(THEOS_PACKAGE_SCHEME),roothide)
+POPreferences_CFLAGS += -DPO2_ROOTHIDE
+else ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
+POPreferences_CFLAGS += -DPO2_ROOTLESS
+endif
+
 include $(THEOS_MAKE_PATH)/bundle.mk
 
 internal-stage::
