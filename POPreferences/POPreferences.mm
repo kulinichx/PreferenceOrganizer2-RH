@@ -12,10 +12,6 @@
 static NSString *const kPODonateURL = @"https://paypal.me/akemindayo"; // original author
 #define POColor [UIColor colorWithRed:1.0 green:168.0/255.0 blue:0.0 alpha:1.0]
 
-@interface PSListController (PO2)
-- (NSString *)localizedString:(NSString *)key;
-@end
-
 @interface POListController : PSListController
 @end
 

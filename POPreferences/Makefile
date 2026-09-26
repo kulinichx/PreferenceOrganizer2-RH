@@ -8,7 +8,7 @@ POPreferences_FILES = POPreferences.mm
 POPreferences_INSTALL_PATH = /Library/PreferenceBundles
 POPreferences_FRAMEWORKS = UIKit
 POPreferences_PRIVATE_FRAMEWORKS = Preferences
-POPreferences_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-function
+POPreferences_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-function -Wno-error
 
 ifeq ($(THEOS_PACKAGE_SCHEME),roothide)
 POPreferences_CFLAGS += -DPO2_ROOTHIDE
