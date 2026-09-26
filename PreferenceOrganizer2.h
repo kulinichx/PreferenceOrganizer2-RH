@@ -8,8 +8,9 @@
 #import "PO2Common.h"
 #import "PO2Log.h"
 
-@interface PreferencesAppController : UIApplication
-- (id)rootController;
+#import <Preferences/PreferencesAppController.h>
+
+@interface PreferencesAppController (PreferenceOrganizer2)
 - (BOOL)preferenceOrganizerOpenTweakPane:(NSString *)name;
 @end
 
